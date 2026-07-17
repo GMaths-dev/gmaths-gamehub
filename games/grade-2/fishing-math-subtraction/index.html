@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Fishing Math</title>
+    <meta name="description" content="Fishing Math." />
+
+    <link rel="stylesheet" href="./base.css" />
+    <link id="deviceCss" rel="stylesheet" href="./styles/phone.css" /> 
+  </head>
+
+  <body>
+    <div id="app" class="app blurred" aria-label="Fishing Math game">
+      <header class="hud" aria-label="Game status bar">
+        <div class="hud__left" aria-label="Progress and controls">
+          <div class="hud__row hud__row--top">
+            <div class="pill" id="coinsPill">Coins: <span id="coins">0</span>/<span id="coinsTarget">5</span></div>
+            <div class="pill" id="questionPill">Question: <span id="questionIndex">1</span>/<span id="questionTotal">5</span></div>
+          </div>
+          <div class="hud__row hud__row--bottom" aria-label="Controls">
+            <button class="btn" id="soundBtn" type="button" aria-label="Toggle sound">
+              Sound: <span id="soundState">On</span>
+            </button>
+            <button class="btn btn--secondary" id="restartBtn" type="button" aria-label="Restart game">
+              Retry
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="logo" aria-label="GMaths logo">
+        <img class="logo__img" src="./assets/logo gmaths.png" alt="GMaths" onerror="this.style.display='none'"/>
+      </div>
+
+      <main id="sceneRoot" class="scene" aria-label="Fishing scene"></main>
+
+      <div id="winOverlay" class="win hidden" role="dialog" aria-modal="true" aria-label="You Win screen">
+        <div class="win__card">
+          <div class="win__title">You Win!</div>
+          <div class="win__subtitle">You caught all the coins!</div>
+          <button id="playAgainBtn" class="btn btn--big" type="button">Play Again</button>
+        </div>
+        <div id="confettiRoot" class="confetti" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <script defer src="./ui/utils.js"></script>
+    <script defer src="./ui/phone.js"></script>
+    <script defer src="./ui/tablet.js"></script>
+    <script defer src="./ui/desktop.js"></script>
+    <script defer src="./src/questions.js"></script>
+    <script defer src="./src/main.js"></script>
+  </body>
+</html>

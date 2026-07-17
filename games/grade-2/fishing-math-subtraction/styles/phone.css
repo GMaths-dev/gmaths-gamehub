@@ -1,0 +1,31 @@
+/* PHONE layout */
+
+.scene {
+  background-image: url("../assets/background-for-mobile.png");
+}
+
+.questionCard__text { font-size: 22px; }
+
+.fisherWrap {
+  right: 10px;
+  top: calc(env(safe-area-inset-top) + 110px);
+  width: 170px;
+  margin-top: 40px;
+}
+
+.fisherTarget {
+  /* điểm hút cá (gần tay/cần câu) */
+  right: 62px;
+  top: 62px;
+}
+
+.fish__sprite {
+  width: 88px;
+  height: 88px;
+}
+
+.fish.slot-1 { left: 10%;  top: 56%; }
+.fish.slot-2 { left: 40%; top: 56%; transform: translateX(-50%); }
+.fish.slot-3 { left: 70%; top: 56%; }
+
+.fish__bubble { min-width: 88px; }

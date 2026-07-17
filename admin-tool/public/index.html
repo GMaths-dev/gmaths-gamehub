@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17162e">
+  <title>GMaths Local Admin</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <section class="login-view" id="login-view">
+    <form class="login-card" id="login-form">
+      <span class="logo">G</span>
+      <p class="eyebrow">Local administration</p>
+      <h1>GMaths Game Importer</h1>
+      <p>Review and prepare game ZIP packages before publishing them to GameHub.</p>
+      <label>Admin password<input id="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit">Unlock tool</button>
+      <p class="message" id="login-message" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <div class="app" id="app" hidden>
+    <header>
+      <div><p class="eyebrow">GMaths Education</p><h1>Local Game Admin</h1></div>
+      <div class="status"><span>Local catalog manager</span><button class="ghost" id="logout">Lock</button></div>
+    </header>
+
+    <main>
+      <section class="panel publication-panel">
+        <div class="panel-heading">
+          <div><p class="step">Publish</p><h2>Website publication</h2><p>Review local changes, then send the approved version to the public teacher website.</p></div>
+          <span class="publication-state" id="publication-state">Checking&hellip;</span>
+        </div>
+        <div class="publication-layout">
+          <div>
+            <strong id="publication-summary">Checking GitHub configuration&hellip;</strong>
+            <p id="publication-detail"></p>
+            <div class="publication-links"><a id="open-repository" target="_blank" rel="noopener" hidden>Open repository</a><a id="open-live-site" target="_blank" rel="noopener" hidden>Open teacher website</a></div>
+          </div>
+          <div class="publication-actions"><button class="secondary" id="refresh-publication">Refresh status</button><button id="publish-github" disabled>Publish to GitHub</button></div>
+        </div>
+        <ul class="change-list" id="publication-changes"></ul>
+        <p class="message publication-message" id="publication-message" aria-live="polite"></p>
+      </section>
+
+      <section class="panel manage-panel">
+        <div class="panel-heading">
+          <div><p class="step">01 · Manage</p><h2>Existing games</h2><p>Edit catalog details, covers and home-page visibility.</p></div>
+          <button class="secondary" id="refresh-games">Refresh list</button>
+        </div>
+        <label class="manager-search">Search games<input id="game-search" type="search" placeholder="Title, subject, lesson or grade"></label>
+        <div class="admin-game-grid" id="game-list"></div>
+        <p class="message" id="manager-message" aria-live="polite"></p>
+      </section>
+
+      <section class="panel upload-panel">
+        <div><p class="step">02 · Import</p><h2>Select a game ZIP</h2><p>The original ZIP is preserved. Analysis and conversion happen in a temporary staging area.</p></div>
+        <label class="drop-zone" id="drop-zone">
+          <input id="zip-file" type="file" accept=".zip,application/zip" hidden>
+          <strong>Drop a ZIP here</strong><span>or click to browse</span><small>Maximum 250 MB</small>
+        </label>
+        <div class="progress" id="upload-progress" hidden><span></span><p>Inspecting package…</p></div>
+      </section>
+
+      <section class="workspace" id="workspace" hidden>
+        <article class="panel report-panel">
+          <div class="panel-heading"><div><p class="step">03 · Review</p><h2>Package analysis</h2></div></div>
+          <div class="summary-grid" id="summary-grid"></div>
+          <div class="report-columns">
+            <div><h3>Checks</h3><ul id="checks"></ul></div>
+            <div><h3>Minimal changes</h3><ul id="changes"></ul></div>
+          </div>
+        </article>
+
+        <article class="panel metadata-panel">
+          <p class="step">04 · Metadata</p><h2>Catalog information</h2>
+          <form id="metadata-form">
+            <div class="form-grid">
+              <label>Game title<input name="title" required></label>
+              <label>Slug<input name="slug" pattern="[a-z0-9-]+" required></label>
+              <label>Game ID<input name="id" pattern="[a-z0-9-]+" required></label>
+              <label>Grade<select name="grade" required><option value="">Choose</option><option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option><option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option><option value="extra">Extra</option></select></label>
+              <label>Subject<input name="subject" value="English Math" required></label>
+              <label>Lesson / topic<input name="topic" placeholder="Lesson 1" required></label>
+            </div>
+            <label>Description<textarea name="description" rows="3" required></textarea></label>
+            <label class="checkbox"><input name="featured" type="checkbox"> Featured game</label>
+            <div class="actions"><button type="submit">Prepare preview</button><button type="button" class="danger" id="publish" disabled>Publish to GameHub</button></div>
+          </form>
+          <p class="message" id="action-message" aria-live="polite"></p>
+        </article>
+
+        <article class="panel preview-panel" id="preview-panel" hidden>
+          <div class="panel-heading"><div><p class="step">05 · Preview</p><h2>Converted game</h2></div><a id="open-preview" target="_blank" rel="noopener">Open separately</a></div>
+          <iframe id="preview-frame" title="Converted game preview" allow="autoplay; fullscreen"></iframe>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="edit-dialog">
+    <form method="dialog" class="dialog-card" id="edit-game-form">
+      <div class="panel-heading"><div><p class="step">Edit game</p><h2 id="edit-heading">Game details</h2></div><button class="ghost close-dialog" value="cancel" type="submit">Close</button></div>
+      <div class="cover-editor">
+        <div class="cover-preview" id="cover-preview"><span>∑</span></div>
+        <div>
+          <label>Replace cover<input id="cover-file" type="file" accept=".png,.jpg,.jpeg,.webp,.gif,image/*"></label>
+          <div class="cover-actions"><button type="button" class="secondary" id="replace-cover">Upload cover</button><button type="button" class="ghost danger-text" id="remove-cover">Remove cover</button></div>
+        </div>
+      </div>
+      <div class="form-grid">
+        <label>Title<input name="title" required></label>
+        <label>Grade<select name="grade" required><option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option><option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option><option value="extra">Extra</option></select></label>
+        <label>Subject<input name="subject" required></label>
+        <label>Lesson / topic<input name="topic" required></label>
+        <label>Orientation<select name="orientation"><option value="any">Any</option><option value="landscape">Landscape</option><option value="portrait">Portrait</option></select></label>
+        <label>Order<input name="order" type="number" min="1" step="1"></label>
+      </div>
+      <label>Description<textarea name="description" rows="4" required></textarea></label>
+      <label class="checkbox"><input name="featured" type="checkbox"> Featured game</label>
+      <div class="dialog-actions"><button type="button" id="save-game">Save changes</button><button type="button" class="danger" id="delete-game">Delete game</button></div>
+      <p class="message" id="edit-message" aria-live="polite"></p>
+    </form>
+  </dialog>
+  <script src="/app.js"></script>
+</body>
+</html>

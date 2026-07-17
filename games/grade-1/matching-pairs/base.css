@@ -1,0 +1,609 @@
+/* ==========================================================================
+  Matching Pairs - Base CSS
+============================================================================ */
+
+:root {
+  --hudH: 58px;
+  --radius: 22px;
+  --shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  --ui: rgba(255, 255, 255, 0.8);
+  --ui2: rgba(255, 255, 255, 0.94);
+  --text: #24324d;
+  --cardBackA: #5d8cff;
+  --cardBackB: #6fd3ff;
+  --cardFrontA: #fffdf4;
+  --cardFrontB: #ffffff;
+  --matchGlow: 0 0 0 4px rgba(255, 220, 91, 0.35), 0 10px 28px rgba(255, 189, 46, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #6ec9ff;
+  color: var(--text);
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app.blurred {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ================= HUD ================= */
+.hud {
+  position: absolute;
+  top: env(safe-area-inset-top);
+  left: 0;
+  right: 0;
+  min-height: var(--hudH);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px 12px;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.hud__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.hud__row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pill {
+  background: var(--ui);
+  backdrop-filter: blur(6px);
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #0b2b38;
+  font-weight: 800;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--secondary {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.btn--big {
+  padding: 12px 18px;
+  font-size: 18px;
+}
+
+/* ================= Logo ================= */
+.logo {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 10px);
+  right: 12px;
+  z-index: 45;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.14);
+  pointer-events: none;
+}
+
+.logo__img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+/* ================= Scene ================= */
+.scene {
+  position: absolute;
+  inset: 0;
+  padding-top: calc(var(--hudH) + env(safe-area-inset-top));
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 16%, rgba(255,255,255,0.82) 0 56px, transparent 57px),
+    radial-gradient(circle at 82% 18%, rgba(255,255,255,0.68) 0 40px, transparent 41px),
+    radial-gradient(circle at 76% 80%, rgba(255,255,255,0.16) 0 120px, transparent 121px),
+    linear-gradient(180deg, #7dd8ff 0%, #83e0bd 48%, #8edb7b 100%);
+}
+
+.scene::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22%;
+  background:
+    radial-gradient(circle at 14% 20%, rgba(255,255,255,0.18) 0 36px, transparent 37px),
+    radial-gradient(circle at 72% 50%, rgba(255,255,255,0.12) 0 46px, transparent 47px),
+    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(120, 210, 107, 0.12) 24%, rgba(90, 180, 83, 0.42) 100%);
+}
+
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
+  pointer-events: none;
+}
+
+.scene__content {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+/* ================= Question card ================= */
+.questionCard {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(env(safe-area-inset-top) + 72px);
+  width: min(760px, calc(100% - 24px));
+  background: var(--ui2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.questionCard__label {
+  font-weight: 900;
+  font-size: 12px;
+  opacity: 0.76;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.questionCard__text {
+  margin-top: 4px;
+  font-weight: 1000;
+  font-size: 24px;
+}
+
+.questionCard__sub {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+/* ================= Board ================= */
+.boardWrap {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  width: min(1080px, calc(100% - 28px));
+  padding: 20px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+}
+
+.board {
+  display: grid;
+  justify-content: center;
+  gap: 16px;
+}
+
+.memoryCard {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1 / 1.15;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  perspective: 900px;
+  -webkit-perspective: 900px;
+}
+
+.memoryCard:disabled {
+  cursor: default;
+}
+
+.memoryCard__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.28s ease;
+}
+
+.memoryCard:hover .memoryCard__inner {
+  filter: none;
+}
+
+.memoryCard.is-flipped .memoryCard__inner,
+.memoryCard.is-matched .memoryCard__inner {
+  transform: rotateY(180deg);
+}
+
+.memoryCard__face {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.memoryCard__face--back {
+  background: linear-gradient(145deg, var(--cardBackA), var(--cardBackB));
+  box-shadow: 0 14px 24px rgba(39, 108, 200, 0.28);
+  border: 4px solid rgba(255,255,255,0.75);
+  transform: rotateY(0deg);
+}
+
+.memoryCard__face--front {
+  transform: rotateY(180deg);
+  background: linear-gradient(180deg, var(--cardFrontA), var(--cardFrontB));
+  border: 4px solid rgba(255,255,255,0.92);
+  box-shadow: 0 10px 24px rgba(53, 80, 109, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memoryCard.is-matched .memoryCard__badge {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+
+.memoryCard__face--back::before,
+.memoryCard__face--back::after {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border-radius: 20px;
+  border: 3px dashed rgba(255,255,255,0.35);
+}
+
+.memoryCard__face--back::after {
+  inset: auto;
+  width: 46%;
+  aspect-ratio: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: rgba(255,255,255,0.12);
+  border: 0;
+  border-radius: 18px;
+}
+
+.memoryCard__sparkles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(24px, 3vw, 34px);
+  color: rgba(255,255,255,0.92);
+  font-weight: 900;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.memoryCard__face--front {
+  transform: rotateY(180deg);
+  background: linear-gradient(180deg, var(--cardFrontA), var(--cardFrontB));
+  border: 4px solid rgba(255,255,255,0.92);
+  box-shadow: 0 10px 24px rgba(53, 80, 109, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memoryCard__content {
+  width: 100%;
+  height: 100%;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.memoryCard__type {
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  opacity: 0.62;
+}
+
+.memoryCard__value {
+  font-size: clamp(22px, 4vw, 40px);
+  font-weight: 1000;
+  line-height: 1.05;
+  color: #294564;
+  word-break: break-word;
+}
+
+.memoryCard__badge {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #ffd65c;
+  color: #6a4c00;
+  font-size: 11px;
+  font-weight: 900;
+  box-shadow: 0 6px 12px rgba(255, 191, 61, 0.26);
+  opacity: 0;
+  transform: translateY(-4px) scale(0.96);
+  transition: all 0.24s ease;
+}
+
+.memoryCard__pairHint {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  background: rgba(255,255,255,0.56);
+}
+
+.helperText {
+  position: absolute;
+  left: 50%;
+  bottom: calc(6px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(760px, calc(100% - 24px));
+  text-align: center;
+  color: rgba(32, 51, 70, 0.94);
+  font-size: 14px;
+  font-weight: 800;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+}
+
+/* ================= Overlay / Win ================= */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: rgba(11, 37, 56, 0.28);
+  backdrop-filter: blur(6px);
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: min(420px, calc(100% - 24px));
+  padding: 26px 22px;
+  text-align: center;
+  background: rgba(255,255,255,0.96);
+  border-radius: 28px;
+  box-shadow: 0 22px 40px rgba(0,0,0,0.24);
+}
+
+.card__title {
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 1000;
+  color: #1e4f72;
+}
+
+.card__sub {
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #41627c;
+}
+
+.card__meta {
+  margin: 14px 0 18px;
+  font-size: 16px;
+  font-weight: 900;
+  color: #ff8a00;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti__piece {
+  position: absolute;
+  width: 12px;
+  height: 18px;
+  border-radius: 4px;
+  animation-name: confettiFall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes confettiFall {
+  from {
+    opacity: 1;
+    transform: translateY(-30px) rotate(0deg);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateY(110vh) rotate(540deg);
+  }
+}
+
+/* ================= Login overlay ================= */
+#login-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999;
+}
+
+.login-box {
+  background: #fffafa;
+  padding: 30px 24px;
+  border-radius: 26px;
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+  border: 4px solid #53b9ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(390px, calc(100% - 24px));
+  animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.login-logo {
+  height: 60px;
+  margin-bottom: 10px;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+}
+
+.login-box h1 {
+  font-size: 28px;
+  color: #2490dc;
+  margin: 0 0 6px 0;
+  font-weight: 900;
+}
+
+.login-box .desc {
+  font-size: 15px;
+  color: #555;
+  margin: 0 0 16px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.login-divider {
+  width: 100%;
+  height: 2px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.login-box h2 {
+  margin: 0 0 10px 0;
+  color: #0b2b38;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+#password-input {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 16px;
+}
+
+#password-input:focus {
+  border-color: #29b6ff;
+  box-shadow: 0 0 12px rgba(41, 182, 255, 0.4);
+}
+
+#login-btn {
+  font-size: 20px;
+  font-weight: 800;
+  padding: 12px 36px;
+  background: linear-gradient(135deg, #77c8ff, #2490dc);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #166fae, 0 6px 20px rgba(36, 144, 220, 0.35);
+  transition: transform 0.1s, box-shadow 0.1s;
+  margin-bottom: 12px;
+}
+
+#login-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #166fae;
+}
+
+#login-error {
+  color: #d32f2f;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* ================= Small safety ================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

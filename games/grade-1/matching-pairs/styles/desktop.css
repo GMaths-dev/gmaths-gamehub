@@ -1,0 +1,26 @@
+/* DESKTOP layout */
+
+.scene {
+  --boardCols: 5;
+}
+
+.questionCard {
+  top: calc(env(safe-area-inset-top) + 76px);
+  width: min(760px, calc(100% - 24px));
+}
+
+.questionCard__text {
+  font-size: 28px;
+}
+
+.boardWrap {
+  width: min(1100px, calc(100% - 38px));
+}
+
+.board {
+  grid-template-columns: repeat(5, minmax(145px, 176px));
+}
+
+.memoryCard__value {
+  font-size: clamp(24px, 3vw, 42px);
+}

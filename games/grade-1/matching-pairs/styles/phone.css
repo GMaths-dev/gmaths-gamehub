@@ -1,0 +1,55 @@
+/* PHONE layout */
+
+.hud {
+  padding-right: 108px;
+}
+
+.pill,
+.btn {
+  font-size: 14px;
+}
+
+.logo {
+  right: 10px;
+  padding: 7px 9px;
+}
+
+.logo__img {
+  height: 28px;
+}
+
+.questionCard {
+  top: calc(env(safe-area-inset-top) + 68px);
+  width: min(100%, calc(100% - 18px));
+  padding: 10px 12px;
+}
+
+.questionCard__text {
+  font-size: 20px;
+}
+
+.questionCard__sub {
+  font-size: 13px;
+}
+
+.boardWrap {
+  top: 55%;
+  width: min(100%, calc(100% - 16px));
+  padding: 12px;
+  border-radius: 24px;
+}
+
+.board {
+  grid-template-columns: repeat(2, minmax(128px, 1fr));
+  gap: 12px;
+}
+
+.memoryCard__face {
+  border-radius: 20px;
+}
+
+.helperText {
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  width: calc(100% - 16px);
+  font-size: 12px;
+}

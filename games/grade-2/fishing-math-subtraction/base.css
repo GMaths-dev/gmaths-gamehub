@@ -1,0 +1,528 @@
+/* ==========================================================================
+  Fishing Math - Base CSS (dùng chung)
+============================================================================ */
+
+:root {
+  --hudH: 58px;
+  --radius: 18px;
+  --shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  --ui: rgba(255, 255, 255, 0.78);
+  --ui2: rgba(255, 255, 255, 0.92);
+  --text: #0b2b38;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #061e2a;
+  color: var(--text);
+  overflow: hidden;
+}
+
+.app {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ================= HUD ================= */
+.hud {
+  position: absolute;
+  top: env(safe-area-inset-top);
+  left: 0;
+  right: 0;
+  min-height: var(--hudH);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px 12px;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.hud__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.hud__row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pill {
+  background: var(--ui);
+  backdrop-filter: blur(6px);
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0b2b38;
+  font-weight: 800;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--secondary {
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.btn--big {
+  padding: 12px 18px;
+  font-size: 18px;
+}
+
+/* ================= Logo ================= */
+.logo {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 10px);
+  right: 12px;
+  z-index: 45;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.14);
+  pointer-events: none;
+}
+
+.logo__img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+/* ================= Scene ================= */
+.scene {
+  position: absolute;
+  inset: 0;
+  padding-top: calc(var(--hudH) + env(safe-area-inset-top));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.18));
+  pointer-events: none;
+}
+
+.scene__content {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+/* ================= Question card ================= */
+.questionCard {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(env(safe-area-inset-top) + 72px);
+  width: min(560px, calc(100% - 24px));
+  background: var(--ui2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.questionCard__label {
+  font-weight: 900;
+  font-size: 12px;
+  opacity: 0.8;
+  letter-spacing: 0.4px;
+}
+
+.questionCard__text {
+  margin-top: 4px;
+  font-weight: 1000;
+  font-size: 22px;
+}
+
+/* ================= Fisherman ================= */
+.fisherWrap {
+  position: absolute;
+  pointer-events: none;
+}
+
+.fisherman {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.22));
+}
+
+.fisherTarget {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  opacity: 0;
+}
+
+/* ================= Fish layer ================= */
+.fishLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.fish {
+  position: absolute;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  transform-origin: center;
+  animation: bob 2.2s ease-in-out infinite;
+}
+
+.fish:active {
+  transform: scale(0.98);
+}
+
+.fish:disabled {
+  cursor: default;
+}
+
+.fish__sprite {
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  display: grid;
+  place-items: center;
+}
+
+.fish__sprite img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.fish__bubble {
+  min-width: 110px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.16);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.fish__key {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 1000;
+  background: rgba(41, 182, 255, 0.22);
+}
+
+.fish__value {
+  font-weight: 1000;
+  font-size: 18px;
+}
+
+.fish.is-wrong {
+  animation: shake 0.42s ease-in-out;
+}
+
+.fish.is-caught {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* Flying fish clone */
+.flyFish {
+  position: fixed;
+  z-index: 80;
+  pointer-events: none;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.22);
+  transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.flyFish img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ================= Overlays ================= */
+.start,
+.win {
+  position: absolute;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.start__card,
+.win__card {
+  width: min(420px, calc(100% - 24px));
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 22px;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.26);
+  padding: 18px;
+  text-align: center;
+}
+
+.start__title,
+.win__title {
+  font-size: 28px;
+  font-weight: 1000;
+}
+
+.start__subtitle,
+.win__subtitle {
+  margin-top: 6px;
+  margin-bottom: 14px;
+  font-weight: 800;
+  opacity: 0.85;
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti__piece {
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  animation-name: confettiFall;
+  animation-timing-function: ease-in;
+  animation-fill-mode: both;
+}
+
+@keyframes confettiFall {
+  from {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110vh) rotate(180deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================================================
+   CSS CHO MÀN HÌNH BẢO MẬT (LOGIN) - AUTO INJECTED
+============================================================================ */
+#login-overlay {
+  position: fixed;
+  inset: 0; 
+  background: rgba(0, 0, 0, 0.75); 
+  backdrop-filter: blur(10px); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999; 
+}
+
+.login-box {
+  background: #fffafa;
+  padding: 30px 24px;
+  border-radius: 26px;
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+  border: 4px solid #0288D1; /* Tone màu xanh biển cho game câu cá */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: inherit;
+  width: min(380px, calc(100% - 24px));
+  animation: popIn 0.5s ease;
+}
+
+@keyframes popIn { 
+  0% { transform: scale(0.5); opacity: 0; } 
+  70% { transform: scale(1.05); } 
+  100% { transform: scale(1); opacity: 1; } 
+}
+
+.login-logo {
+  height: 60px;
+  margin-bottom: 8px;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+}
+
+.login-box h1 {
+  font-size: 26px;
+  color: #0288D1;
+  margin: 0 0 4px 0;
+  font-weight: 900;
+}
+
+.login-box .subtitle {
+  font-size: 17px;
+  color: #FF8F00;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.login-box .desc {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 16px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.login-divider {
+  width: 100%;
+  height: 2px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.login-box h2 {
+  margin: 0 0 10px 0;
+  color: #0b2b38;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+#password-input {
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 16px;
+}
+
+#password-input:focus {
+  border-color: #29b6ff;
+  box-shadow: 0 0 12px rgba(41, 182, 255, 0.4);
+}
+
+#login-btn {
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 12px 36px;
+  background: linear-gradient(135deg, #29b6ff, #0288D1);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #01579B, 0 6px 20px rgba(2,136,209,0.35);
+  transition: transform 0.1s, box-shadow 0.1s;
+  margin-bottom: 12px;
+}
+
+#login-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #01579B;
+}
+
+#login-error {
+  color: #d32f2f;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  opacity: 0; 
+  transition: opacity 0.3s;
+}
+
+/* Class làm mờ toàn bộ game và vô hiệu hóa click phía sau overlay */
+#app.blurred {
+  filter: blur(8px) grayscale(20%);
+  pointer-events: none;
+  user-select: none;
+  transition: filter 0.4s ease;
+}

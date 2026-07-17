@@ -1,0 +1,10 @@
+(function(){
+  "use strict";
+  const config=window.GAME_CONFIG;let score=0,round=0,soundOn=config.soundEnabled,answer=0;
+  const elements={title:document.getElementById("game-title"),score:document.getElementById("score"),prompt:document.getElementById("prompt"),answers:document.getElementById("answers"),feedback:document.getElementById("feedback")};
+  const tone=frequency=>{if(!soundOn)return;const AudioContext=window.AudioContext||window.webkitAudioContext;if(!AudioContext)return;const context=new AudioContext(),oscillator=context.createOscillator(),gain=context.createGain();oscillator.frequency.value=frequency;gain.gain.setValueAtTime(.08,context.currentTime);gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+.15);oscillator.connect(gain).connect(context.destination);oscillator.start();oscillator.stop(context.currentTime+.15);};
+  function nextRound(){if(round>=config.rounds){elements.prompt.textContent="Great work!";elements.answers.replaceChildren();elements.feedback.textContent=`Final score: ${score}/${config.rounds}`;return;}const a=1+Math.floor(Math.random()*9),b=1+Math.floor(Math.random()*9);answer=a+b;elements.prompt.textContent=`${a} + ${b} = ?`;elements.feedback.textContent="";const choices=new Set([answer]);while(choices.size<3)choices.add(Math.max(1,answer+Math.floor(Math.random()*7)-3));elements.answers.replaceChildren(...[...choices].sort(()=>Math.random()-.5).map(value=>{const button=document.createElement("button");button.className="answer";button.type="button";button.textContent=value;button.addEventListener("click",()=>choose(value));return button;}));round++;}
+  function choose(value){if(value===answer){score++;elements.score.textContent=score;elements.feedback.textContent="Correct!";tone(660);setTimeout(nextRound,500);}else{elements.feedback.textContent="Try again";tone(180);}}
+  function replay(){score=0;round=0;elements.score.textContent="0";nextRound();}
+  elements.title.textContent=config.title;document.title=config.title;replay();
+})();

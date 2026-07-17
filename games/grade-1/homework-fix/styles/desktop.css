@@ -1,0 +1,27 @@
+:root {
+  --scenePad: 18px;
+  --itemSize: 78px;
+  --choiceSize: 66px;
+}
+
+.homeworkBoard {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px 18px;
+}
+
+.sentenceCard,
+.picturePanel {
+  min-height: 290px;
+}
+
+.picturePanel__board {
+  min-height: 204px;
+}
+
+.feedbackBar {
+  min-height: 78px;
+}
+
+.logo__img {
+  height: 32px;
+}

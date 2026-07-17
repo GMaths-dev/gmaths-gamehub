@@ -1,0 +1,79 @@
+[
+  {
+    "id": "g2-sum-pyramid",
+    "title": "Sum Pyramid",
+    "grade": 2,
+    "subject": "English Math",
+    "topic": "Lesson 6",
+    "description": "Complete each pyramid by adding the two numbers directly below every block.",
+    "thumbnail": "thumbnails/grade-2/g2-sum-pyramid.png",
+    "gamePath": "games/grade-2/sum-pyramid/index.html",
+    "inputMethods": [
+      "mouse",
+      "touch",
+      "keyboard"
+    ],
+    "orientation": "landscape",
+    "status": "published",
+    "featured": true,
+    "order": 1,
+    "updatedAt": "2026-07-16"
+  },
+  {
+    "id": "fishing-math-subtraction",
+    "title": "Fishing Math",
+    "grade": 2,
+    "subject": "English Math",
+    "topic": "Lesson 4",
+    "description": "Interactive educational game.",
+    "thumbnail": "thumbnails/grade-2/fishing-math-subtraction.png",
+    "gamePath": "games/grade-2/fishing-math-subtraction/index.html",
+    "inputMethods": [
+      "mouse",
+      "touch"
+    ],
+    "orientation": "any",
+    "status": "published",
+    "featured": false,
+    "order": 2,
+    "updatedAt": "2026-07-16"
+  },
+  {
+    "id": "matching-pairs",
+    "title": "Matching Pairs",
+    "grade": 1,
+    "subject": "English Math",
+    "topic": "Lesson 1",
+    "description": "Interactive educational game.",
+    "thumbnail": "thumbnails/grade-1/matching-pairs.png",
+    "gamePath": "games/grade-1/matching-pairs/index.html",
+    "inputMethods": [
+      "mouse",
+      "touch"
+    ],
+    "orientation": "any",
+    "status": "published",
+    "featured": false,
+    "order": 3,
+    "updatedAt": "2026-07-16"
+  },
+  {
+    "id": "homework-fix",
+    "title": "Homework Fix!",
+    "grade": 1,
+    "subject": "English Math",
+    "topic": "Lesson 2",
+    "description": "Good game",
+    "thumbnail": "thumbnails/grade-1/homework-fix.png",
+    "gamePath": "games/grade-1/homework-fix/index.html",
+    "inputMethods": [
+      "mouse",
+      "touch"
+    ],
+    "orientation": "any",
+    "status": "published",
+    "featured": false,
+    "order": 2,
+    "updatedAt": "2026-07-16"
+  }
+]

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Matching Pairs</title>
+    <meta name="description" content="Matching Pairs educational memory game." />
+
+    <link rel="stylesheet" href="./base.css" />
+    <link id="deviceCss" rel="stylesheet" href="./styles/phone.css" />
+  </head>
+
+  <body>
+    <div id="login-overlay">
+      <div class="login-box">
+        <img src="./assets/logo gmaths.png" alt="GMaths Logo" class="login-logo" onerror="this.style.display='none'" />
+        <h1>Matching Pairs</h1>
+        <p class="desc">Flip the cards and match each number with the correct word.</p>
+        <div class="login-divider"></div>
+        <h2>Enter the secret password to play!</h2>
+        <input type="password" id="password-input" placeholder="Typing..." />
+        <button id="login-btn">Start game</button>
+        <p id="login-error">Wrong password, try again</p>
+      </div>
+    </div>
+
+    <div id="app" class="app blurred" aria-label="Matching Pairs game">
+      <header class="hud" aria-label="Game status bar">
+        <div class="hud__left">
+          <div class="hud__row hud__row--top">
+            <div class="pill">Pairs: <span id="pairsMatched">0</span>/<span id="pairsTarget">5</span></div>
+            <div class="pill">Moves: <span id="movesCount">0</span></div>
+          </div>
+          <div class="hud__row hud__row--bottom">
+            <button class="btn" id="soundBtn" type="button" aria-label="Toggle sound">
+              Sound: <span id="soundState">On</span>
+            </button>
+            <button class="btn" id="fullscreenBtn" type="button" aria-label="Toggle fullscreen">
+              Fullscreen: <span id="fullscreenState">Off</span>
+            </button>
+            <button class="btn btn--secondary" id="restartBtn" type="button" aria-label="Retry / restart">
+              Retry
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="logo" aria-label="GMaths logo">
+        <img class="logo__img" src="./assets/logo gmaths.png" alt="GMaths" onerror="this.style.display='none'" />
+      </div>
+
+      <main id="sceneRoot" class="scene" aria-label="Matching pairs scene"></main>
+
+      <div id="winOverlay" class="overlay overlay--win hidden" role="dialog" aria-modal="true" aria-label="You win screen">
+        <div class="card">
+          <div class="card__title">Great job!</div>
+          <div class="card__sub">You matched all pairs!</div>
+          <div class="card__meta">Moves used: <span id="finalMoves">0</span></div>
+          <button id="playAgainBtn" class="btn btn--big" type="button">Play Again</button>
+        </div>
+        <div id="confettiRoot" class="confetti" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <script defer src="./ui/utils.js"></script>
+    <script defer src="./ui/phone.js"></script>
+    <script defer src="./ui/tablet.js"></script>
+    <script defer src="./ui/desktop.js"></script>
+    <script defer src="./src/questions.js"></script>
+    <script defer src="./src/main.js"></script>
+  </body>
+</html>

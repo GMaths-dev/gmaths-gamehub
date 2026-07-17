@@ -1,0 +1,74 @@
+:root {
+  --scenePad: 12px;
+  --itemSize: 58px;
+  --choiceSize: 56px;
+}
+
+.homeworkBoard {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "title"
+    "sentence"
+    "picture"
+    "answer"
+    "feedback";
+  gap: 12px;
+}
+
+.titleStrip {
+  margin-top: -2px;
+}
+
+.sentenceCard {
+  padding: 14px 14px 12px;
+  min-height: auto;
+}
+
+.sentenceCard__top {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sentenceCard__prompt {
+  font-size: 22px;
+}
+
+.sentenceCard::before {
+  top: 82px;
+  height: calc(100% - 98px);
+}
+
+.picturePanel {
+  min-height: 230px;
+  padding: 14px 12px 16px;
+}
+
+.picturePanel__board {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  min-height: 160px;
+}
+
+.numberGrid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.feedbackBar {
+  min-height: 70px;
+  font-size: 18px;
+}
+
+.logo__img {
+  height: 28px;
+}
+
+.helperStrip {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%) translateY(-6px);
+}
+
+.helperStrip.show {
+  transform: translateX(-50%) translateY(0);
+}

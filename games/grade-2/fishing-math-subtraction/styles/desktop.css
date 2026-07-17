@@ -1,0 +1,34 @@
+/* DESKTOP layout */
+
+.scene {
+  background-image: url("../assets/background-for-laptop.jpg");
+}
+
+.questionCard {
+  top: calc(env(safe-area-inset-top) + 76px);
+  width: min(720px, calc(100% - 24px));
+}
+.questionCard__text { font-size: 28px; }
+
+.fisherWrap {
+  right: 30px;
+  top: calc(env(safe-area-inset-top) + 180px);
+  width: 400px;
+  margin-top: 30px;
+}
+
+.fisherTarget {
+  right: 118px;
+  top: 104px;
+}
+
+.fish__sprite {
+  width: 180px;
+  height: 180px;
+}
+
+.fish.slot-1 { left: 10%; top: 58%; }
+.fish.slot-2 { left: 30%; top: 58%; transform: translateX(-50%); }
+.fish.slot-3 { left: 50%; top: 58%; }
+
+.fish__bubble { min-width: 130px; }

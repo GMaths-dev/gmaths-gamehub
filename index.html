@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Educational games for English Math, Science and STEAM">
+  <meta name="theme-color" content="#5b4bdb">
+  <title>GMaths GameHub</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#game-catalog">Skip to games</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="GMaths GameHub home">
+      <img class="brand-logo" src="assets/images/logo/logo_gmaths.png" alt="GMaths Education logo">
+      <span><strong id="site-name">GMaths GameHub</strong><small>Learn. Play. Grow.</small></span>
+    </a>
+    <div class="header-actions">
+      <label class="search-box" for="search-input">
+        <input id="search-input" type="search" placeholder="Search games, topics..." autocomplete="off">
+        <span class="search-icon" aria-hidden="true"></span>
+      </label>
+      <button class="filter-toggle" id="filter-toggle" type="button" aria-controls="filters" aria-expanded="false">Filters</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Welcome back, teacher!</p>
+        <h1 id="hero-title">Where learning feels<br><em>like an adventure.</em></h1>
+        <p>Pick a game, sharpen your skills, and collect a little more confidence with every round.</p>
+        <a class="primary-button" href="#game-catalog">Explore games <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"><span>÷</span></div>
+        <div class="orbit orbit-two"><span>+</span></div>
+        <div class="planet">π</div>
+        <span class="spark spark-one">✦</span><span class="spark spark-two">✦</span>
+      </div>
+    </section>
+
+    <section class="catalog-layout" id="game-catalog" aria-labelledby="catalog-title">
+      <aside class="filters" id="filters">
+        <div class="filter-heading"><h2>Discover</h2><button id="clear-filters" type="button">Reset</button></div>
+        <fieldset id="grade-filters"><legend>Grade level</legend></fieldset>
+        <fieldset id="subject-filters"><legend>Subject</legend></fieldset>
+      </aside>
+
+      <div class="catalog-content">
+        <div class="catalog-heading">
+          <div><p class="eyebrow">Game library</p><h2 id="catalog-title">Choose your next challenge</h2></div>
+          <p id="result-count" aria-live="polite">Loading games…</p>
+        </div>
+        <div class="active-filters" id="active-filters" aria-label="Active filters"></div>
+        <div class="game-grid" id="game-grid" aria-live="polite" aria-busy="true"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <span aria-hidden="true">✦</span><h3>No games found</h3><p>Try a different search or clear your filters.</p>
+          <button class="secondary-button" id="empty-reset" type="button">Show all games</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><p>Games are designed for smooth play on laptops and iPads.</p><p>© <span id="current-year"></span> GMaths GameHub</p></footer>
+  <template id="game-card-template">
+    <article class="game-card">
+      <a class="game-card-link" href="#">
+        <div class="thumbnail"><img alt="" loading="lazy"><span class="thumbnail-symbol" aria-hidden="true"></span><span class="featured-badge" hidden>Featured</span></div>
+        <div class="card-body"><div class="card-meta"><span class="grade-badge"></span><span class="subject"></span></div><h3></h3><p class="topic"></p><p class="description"></p><span class="play-label">Play now <b aria-hidden="true">→</b></span></div>
+      </a>
+    </article>
+  </template>
+  <script src="assets/js/search.js" defer></script>
+  <script src="assets/js/catalog.js?v=20260716-3" defer></script>
+  <script src="assets/js/app.js?v=20260716-3" defer></script>
+</body>
+</html>

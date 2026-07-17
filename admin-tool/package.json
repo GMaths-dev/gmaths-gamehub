@@ -1,0 +1,14 @@
+{
+  "name": "gmaths-gamehub-admin",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Local-only admin tool for reviewing and importing game ZIP packages.",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js",
+    "test:admin": "node scripts/admin-integration-test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

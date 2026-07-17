@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Build each level of a Sum Pyramid by adding the two blocks below.">
+  <meta name="theme-color" content="#120b09">
+  <title>Sum Pyramid</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./game-shell.css">
+</head>
+<body>
+  <div id="game" aria-label="Sum Pyramid game"></div>
+  <div id="fatal" role="alert">The game could not start. Please refresh and try again.</div>
+  <script src="./vendor/phaser.min.js"></script>
+  <script>if(!window.Phaser){document.getElementById('fatal').style.display='grid';}</script>
+  <script type="module" src="./js/main.js?v=20260716-2"></script>
+</body>
+</html>

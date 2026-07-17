@@ -1,0 +1,5 @@
+admin-tool/.data/
+admin-tool/.env
+*.log
+.DS_Store
+Thumbs.db
