@@ -2,6 +2,8 @@
 
 A dependency-free static game library for GitHub Pages. It loads the catalog and site options from JSON, supports search and filters, and opens every game in a full-screen-friendly iframe.
 
+Public teacher website: <https://gmaths-dev.github.io/gmaths-gamehub/>
+
 ## Run locally
 
 Open this folder in VS Code, install the **Live Server** extension if needed, then right-click `index.html` and choose **Open with Live Server**. Fetching JSON does not work reliably by opening the HTML directly with `file://`.
@@ -52,6 +54,8 @@ cd admin-tool
 ```
 
 See `admin-tool/README.md` for setup and security details.
+
+After testing a local change, use **Publish to GitHub** in the admin tool. Only public GameHub files are committed by that action; local passwords, uploads, logs, staging jobs, and trash remain on this computer.
 
 ## Deploy on GitHub Pages
 

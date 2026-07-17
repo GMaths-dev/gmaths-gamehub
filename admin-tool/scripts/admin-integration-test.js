@@ -57,6 +57,11 @@ async function main(){
     const cookie=login.headers.get("set-cookie").split(";")[0];
     const request=(pathname,options={})=>fetch(base+pathname,{...options,headers:{cookie,...options.headers}});
 
+    let publicationResponse=await request("/api/publication/status");
+    let publicationPayload=await publicationResponse.json();
+    assert.equal(publicationResponse.status,200);
+    assert.equal(publicationPayload.configured,false);
+
     let response=await request("/api/games");
     let payload=await response.json();
     assert.equal(payload.games.length,1);
